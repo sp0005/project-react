@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-400">
       <div className="max-w-md bg-white p-8 rounded-3xl m-10 w-full shadow-md">
-        <h2 className="font-bold mb-6 text-center text-2xl">Forgot Password</h2>
+        <h2 className="font-bold mb-6 text-center text-2xl">Forgot Password ?</h2>
         <Formik
           initialValues={{ email: '' }}
           validationSchema={validationSchema}
