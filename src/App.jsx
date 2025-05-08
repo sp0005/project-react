@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Registrationform from './pages/Registrationform';
+import Loginform from './pages/Loginform';
+import ForgotPassword from './pages/Forgotpassword';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-       
-      </div>
-      
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Loginform />} />
+        <Route path="/register" element={<Registrationform />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
