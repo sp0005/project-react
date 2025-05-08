@@ -1,8 +1,10 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const fields = [
@@ -12,12 +14,29 @@ const fields = [
 ];
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(4, 'Minimum 4 characters').max(40, 'Must be 40 characters or less').required('This field is required'),
-  email: Yup.string().email('Invalid email address').required('Email is required.'),
-  password: Yup.string().min(8, 'Minimum 8 characters').max(30, 'Maximum 30 characters').required('Password is required.'),
+  name: Yup.string()
+    .min(4, 'Minimum 4 characters')
+    .max(40, 'Must be 40 characters or less')
+    .required('This field is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required.'),
+  password: Yup.string()
+    .min(8, 'Minimum 8 characters')
+    .max(30, 'Maximum 30 characters')
+    .required('Password is required.'),
 });
 
 const Registrationform = () => {
+  const postFormData = async (values) => {
+    try {
+      await axios.post("https://blog-hqx2.onrender.com/user/register", values);
+      toast.success("user register sucessfully");
+    } catch (error) {
+      toast.error("Registration error");
+console.log(error)    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-400 shadow-pink-500/50">
       <div className="max-w-md bg-white p-8 rounded-3xl m-10 w-full shadow-md">
@@ -25,8 +44,8 @@ const Registrationform = () => {
         <Formik
           initialValues={{ name: '', email: '', password: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={async (values) => {
+            await postFormData(values);
           }}
         >
           <Form className="grid grid-cols-1 gap-5">
@@ -43,20 +62,23 @@ const Registrationform = () => {
                 />
                 <ErrorMessage name={field.name} component="div" className="text-red-500 text-sm mt-1" />
               </div>
-            ))}
-
+            ))} 
+            <ToastContainer/>
             <button
               type="submit"
               className="w-full h-10 mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
             >
               Sign Up
             </button>
-       <button type="button" className="w-full h-10 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200 flex items-center justify-center gap-2"
-  onClick={() => alert('Google login clicked')}
-    >
-  <FcGoogle className="text-xl" />
-  Continue with Google
-</button>
+
+            <button
+              type="button"
+              className="w-full h-10 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200 flex items-center justify-center gap-2"
+              onClick={() => alert('Google login clicked')}
+            >
+              <FcGoogle className="text-xl" />
+              Continue with Google
+            </button>
 
             <p className="text-center text-sm mt-4">
               Already have an account?{' '}
