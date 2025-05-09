@@ -7,6 +7,15 @@ const AuthProvider = ({ children }) => {
 
   console.log(token, "This is token");
   console.log(user, "This is user");
+  useEffect(()=>{
+    if (token && user){
+        localStorage.setItem("token",token)
+        localStorage.setItem("user",JSON.stringify(user))
+    }else{
+        localStorage.removeItem("token");
+        localStorage.removeItem("user")
+    }
+  },[token,user])
 
   const login = (loginToken, userDetails) => {
     setToken(loginToken);
