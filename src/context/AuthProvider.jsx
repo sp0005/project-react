@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [token,setToken]=useState(()=> localStorage.getItem("token"))
+  
+  
+
 
   console.log(token, "This is token");
   console.log(user, "This is user");
