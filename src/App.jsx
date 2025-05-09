@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Loginform />} />
         <Route path="/register" element={<Registrationform />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword/> } /> 
       </Routes>
     </Router>
   );

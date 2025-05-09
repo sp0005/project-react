@@ -1,57 +1,42 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required.'),
-});
+function ForgotPassword() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-const ForgotPassword = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate backend call
+    setMessage(`If an account with ${email} exists, a password reset link has been sent.`);
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-400">
-      <div className="max-w-md bg-white p-8 rounded-3xl m-10 w-full shadow-md">
-        <h2 className="font-bold mb-6 text-center text-2xl">Forgot Password ?</h2>
-        <Formik
-          initialValues={{ email: '' }}
-          validationSchema={validationSchema}
-          onSubmit={(values) => {
-            alert(`Password reset link sent to: ${values.email}`);
-          }}
-        >
-          <Form className="grid grid-cols-1 gap-5">
-            <div>
-              <label htmlFor="email" className="block font-bold">
-                Email
-              </label>
-              <Field
-                name="email"
-                id="email"
-                type="email"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-              <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full h-10 mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-            >
-              Send Reset Link
-            </button>
-
-            <p className="text-center text-sm mt-4">
-              <Link to="/" className="text-blue-600 hover:underline">
-                Back to Login
-              </Link>
-            </p>
-          </Form>
-        </Formik>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">Forgot Password</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-gray-700 mb-1" htmlFor="email">Email address</label>
+            <input
+              id="email"
+              type="email"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            Send Reset Link
+          </button>
+        </form>
+        {message && <p className="mt-4 text-sm text-green-600 text-center">{message}</p>}
       </div>
     </div>
   );
-};
+}
 
 export default ForgotPassword;

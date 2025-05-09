@@ -43,15 +43,17 @@ const LoginForm = () => {
               </div>
             ))}
 
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center">
-                <Field type="checkbox" name="remember" className="mr-2" />
-                Remember me
-              </label>
-              <Link to="/forgot-password" className="text-blue-600 hover:underline">
-                Forgot password?
-              </Link>
-            </div>
+        <div className="flex items-center justify-between text-sm mt-4">
+        <label className="flex items-center text-gray-700">
+      <Field
+      type="checkbox" name="remember" className="mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"/>
+    Remember me
+  </label>
+  <Link to="/forgot-password" className="text-blue-600 hover:underline">
+    Forgot password?
+  </Link>
+    </div>
+
 
             <button
               type="submit"
