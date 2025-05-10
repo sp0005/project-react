@@ -28,7 +28,7 @@ const LoginForm = () => {
       const response = await axios.post('https://blog-hqx2.onrender.com/user/login', values);
       toast.success("Login successful");
       login(response.data.token, response.data.user); 
-      navigate('/dashboard');  
+      navigate('/blogs');  
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
       console.error(error);
