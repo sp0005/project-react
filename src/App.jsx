@@ -4,16 +4,18 @@ import Loginform from './pages/Loginform';
 import LandingPage from './pages/LandingPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
+import Dashboarad from './pages/Dashboard';
 
 function App() {
   return (
     <Router>
       <Routes>
+
         <Route
           path="/blogs"
           element={
             <ProtectedRoute>
-              <Home />
+              <Dashboarad />
             </ProtectedRoute>
           }
         />
